@@ -7,12 +7,20 @@ import Nav from './components/Nav'
 
 class App extends React.Component {
     render() {
+
         return (
             <Router>
                 <div className='container'>
                     <Nav />
                     <Switch>
-                        <Route exact path='/' component={Posts} />
+                        <Route exact path='/'
+                         render={(props) => (
+                             <Posts {...props} post={'topstories'} />
+                         )} />
+                         <Route exact path='/new'
+                         render={(props) => (
+                             <Posts {...props} post={'newstories'} />
+                         )} />
                     </Switch>
                 </div>
             </Router>

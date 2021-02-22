@@ -7,17 +7,18 @@ import Nav from './Nav'
 
 function PostsList({ posts }) {
 
-    console.table(posts);
-
     return (
         <ul>
             {posts.map((post, index) => {
-                const { by, descendants, id, kids, score, time, title, type, url } = post
-                let date = new Date(time * 1000).toLocaleDateString()
-                let hours = new Date(time * 1000).toLocaleTimeString()
+
+                if (post !== null) {
+
+                    const { by, descendants, id, kids, score, time, title, type, url } = post
+                    let date = new Date(time * 1000).toLocaleDateString()
+                    let hours = new Date(time * 1000).toLocaleTimeString()
 
 
-                return (
+                    return (
                         <li className='post' key={index}>
                             <a className='link' href={url}>{title}</a>
                             <div className='meta-info-light'>
@@ -27,31 +28,61 @@ function PostsList({ posts }) {
                             </div>
                         </li>
 
-                )
+                    )
 
-            })}
+                }
+                else {
+                    return console.log(`a value was null on index ${index}`)
+                }
+
+            }
+
+            )}
         </ul>
     )
 }
-/* var date_test = new Date("2011-07-14 11:23:00".replace(/-/g,"/"));
-console.log(date_test); */
-////by, descendants, id, kids, score, time, title, type, url
 
 export default class Posts extends React.Component {
 
     state = {
+        type: 'topstories',
         posts: [],
         error: null
     }
 
     componentDidMount() {
-        getPosts().then((result) => this.setState({ posts: result }))
+
+        this.setState({
+            type: this.props.post
+        })
+        this.fetchPosts();
+
+    }
+
+    componentDidUpdate(prevState) {
+
+
+        if (prevState.post !== this.props.post) {
+            this.setState({
+                posts: [],
+                type: this.props.post
+            }, () => this.fetchPosts())
+        }
+    }
+
+    fetchPosts = () => {
+
+        const { type } = this.state;
+        this.setState({
+            type: null,
+            posts: []
+        }, () => getPosts(type).then((result) => this.setState({ posts: result, type: this.props.post }))
             .catch(() => {
                 console.warn('Error fetching posts')
                 this.setState({
                     error: 'Error fetching posts'
                 })
-            })
+            }))
 
     }
 
@@ -61,17 +92,9 @@ export default class Posts extends React.Component {
         return !posts.length && error === null;
     }
 
-    /* .then((data) => this.setState(({ repos }) => ({
-            repos: {
-              ...repos,
-              [selectedLanguage]: data
-            }
-          })))*/
-
-
-
     render() {
         const { posts, error } = this.state;
+
         return (
             <React.Fragment>
                 {this.isLoading() && <Loading />}
@@ -81,15 +104,6 @@ export default class Posts extends React.Component {
                     {posts.length > 0 && <PostsList posts={posts} />}
                 </div>
             </React.Fragment>
-
         )
     }
 }
-
-/* {posts.map((post, index) => {
-                        return (
-                            <li key={index}>
-                                {post}
-                            </li>
-                        )
-                    })}*/
