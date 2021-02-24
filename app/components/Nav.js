@@ -21,7 +21,6 @@ export default function Nav() {
                         Top
                     </NavLink>
                 </li>
-
                 <li>
                     <NavLink
                         to='/new'
