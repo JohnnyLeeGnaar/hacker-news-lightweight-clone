@@ -1,76 +1,31 @@
 
 import React from 'react'
 import queryString from 'query-string'
-import { getComments } from '../utils/api'
+import { getPost } from '../utils/api'
 import Loading from './Loading'
-import parse from 'html-react-parser';
+import Comments from './Comments'
+import { Link } from 'react-router-dom'
 
 
-function Comments(props) {
-    const { comments } = props;
-    console.table(comments)
-
-    function test(text) {
-        if (text !== undefined && text.length) {
-            return parse(text)
-        }
-        else {
-            return <p></p>
-        }
-
-    }
-
-    return (
-        <ul>
-            {comments.map((comment, index) => {
-
-                if (comment !== null) {
-
-                    const { by, id, parent, text, time, type, kids } = comment
-                    let date = new Date(time * 1000).toLocaleDateString()
-                    let hours = new Date(time * 1000).toLocaleTimeString()
-
-
-                    return (
-                        <li className='comment' key={index}>
-                            <div className='meta-info-light'>
-                                <span> by <a href='#'>{by}</a></span>
-                                <span> on  {date}, {hours} </span>
-                                <div>{test(text)}</div>
-                            </div>
-                        </li>
-
-                    )
-                }
-                else {
-                    return console.log(`a value was null on index ${index}`)
-                }
-
-            }
-
-            )}
-        </ul>
-    )
-}
 
 
 export default class Post extends React.Component {
 
     state = {
-        comments: [],
+        post: {},
         error: null
     }
 
     componentDidMount() {
-        this.fetchComments()
+        this.fetchPost()
     }
 
-    fetchComments = () => {
+    fetchPost = () => {
         const { id } = queryString.parse(this.props.location.search)
-        getComments(id).then(result => this.setState({
-            comments: result
+        getPost(id).then(result => this.setState({
+            post: result
         })).catch(() => {
-            console.warn('Error fetching posts')
+            console.warn('Error fetching post')
             this.setState({
                 error: 'A NetworkError occured while attempting to fetch resource.'
             })
@@ -78,22 +33,37 @@ export default class Post extends React.Component {
     }
 
     isLoading = () => {
-        const { comments, error } = this.state
+        const { post, error } = this.state
 
-        return !comments.length && error === null;
+        return Object.keys(post).length === 0 && error === null;
     }
 
 
     render() {
-        const { comments, error } = this.state;
+        const { post, error } = this.state;
+        const { title, by, id, descendants } = post;
+        const query = queryString.parse(this.props.location.search)
+        const postId = query.id;
+        let date = new Date(post.time * 1000).toLocaleDateString()
+        let hours = new Date(post.time * 1000).toLocaleTimeString()
 
         return (
             <React.Fragment>
-                { this.isLoading() && <Loading text='Fetching comments' />}
+                { this.isLoading() && <Loading text='Fetching post' />}
                 { error && <p className='center-text error'>{error}</p>}
-                <div>
-                    <h1>Comments:</h1>
-                    {comments.length > 0 && <Comments comments={comments} />}
+                <div className='meta-info-light'>
+                    <h1>{title}</h1>
+                    <span> by <a href='#'>{by}</a></span>
+                    <span> on  {date}, {hours} </span>
+                    <span><Link
+                        to={{
+                            pathname: 'post',
+                            search: `id=${id}`
+                        }}>
+                        {descendants}</Link> comments</span>
+                </div>
+                <div className='meta-info-light'>
+                    <Comments postId={postId} />
                 </div>
             </React.Fragment>
         )

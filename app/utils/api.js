@@ -7,11 +7,14 @@ export function getPosts(type) {
         .then(response => response.json())
         .then(posts => fetchItems(posts))
 }
+
+export function getPost(id) {
+    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+        .then(response => response.json())
+        .then(posts => posts)
+}
 //after getting the id of the story as an argument, fetch returns an json object that has a property of 'kids' in an array which you can pass to fetchItems
 
-//problem koji imam je da ne znam kako da fetcham naslova Clanka uz komentare. Ova funkcija ispod fetcha "Clanak", te mogu povuci posts.title, ali meni treba posts.kids
-//koji dalje proslijedim u fetchItems funkciju. Pokusao sam default params imati za fetchItems, pa title naknadno kao argument ubaciti, pa eventualno kao response vratiti, al ne radi
-// jedini nacin koji vidim je da napravim nes tipa getPostsTitle funkciju, pa opet fetcham samo naslov, al stalno me kopka da postoji bolji nacin
 export function getComments(id) {
     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
         .then(response => response.json())
@@ -38,3 +41,11 @@ function fetchItems(items) {
             return response
         })
 }
+
+/*fetch(url)
+    .then(response => response.arrayBuffer())
+    .then(buffer => {
+      let decoder = new TextDecoder('iso-8859-1');
+      return decoder.decode(buffer);
+    })
+    .then(res => JSON.parse(res))*/

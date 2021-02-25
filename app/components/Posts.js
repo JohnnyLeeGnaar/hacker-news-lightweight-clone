@@ -29,7 +29,7 @@ function PostsList({ posts }) {
                                         pathname: 'post',
                                         search: `id=${id}`
                                     }}>
-                                    {descendants} comments</Link></span>
+                                    {descendants}</Link> comments</span>
                             </div>
                         </li>
                     )
