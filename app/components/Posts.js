@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { getPosts } from '../utils/api'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Loading from './Loading'
-import Nav from './Nav'
-import Post from './Post'
 
 
 function PostsList({ posts }) {
@@ -19,37 +17,27 @@ function PostsList({ posts }) {
                     let date = new Date(time * 1000).toLocaleDateString()
                     let hours = new Date(time * 1000).toLocaleTimeString()
 
-
                     return (
-                            <li className='post' key={index}>
-                                <a className='link' href={url}>{title}</a>
-                                <div className='meta-info-light'>
-                                    <span> by <a href='#'>{by}</a></span>
-                                    <span> on  {date}, {hours} </span>
+                        <li className='post' key={index}>
+                            <a className='link' href={url}>{title}</a>
+                            <div className='meta-info-light'>
+                                <span> by <a href='#'>{by}</a></span>
+                                <span> on  {date}, {hours} </span>
 
-                                    <span><Link
-                                        to={{
-                                            pathname: 'post',
-                                            search: `id=${id}`
-                                        }}>
-                                        {descendants} comments</Link></span>
-                                </div>
-                            </li>
-
+                                <span><Link
+                                    to={{
+                                        pathname: 'post',
+                                        search: `id=${id}`
+                                    }}>
+                                    {descendants} comments</Link></span>
+                            </div>
+                        </li>
                     )
-
-                    /*
-                     <Route exact path='/roster' component={FullRoster}/>
-                     <Route path='/roster/:number' component={Player}/>
-            */
                 }
                 else {
                     return console.log(`a value was null on index ${index}`)
                 }
-
-            }
-
-            )}
+            })}
         </ul>
     )
 }
@@ -92,7 +80,7 @@ export default class Posts extends React.Component {
             .catch(() => {
                 console.warn('Error fetching posts')
                 this.setState({
-                    error: 'Error fetching posts'
+                    error: 'A NetworkError occured while attempting to fetch resource.'
                 })
             }))
 

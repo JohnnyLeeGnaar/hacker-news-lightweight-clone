@@ -40,6 +40,7 @@
     "svg-inline-loader": "^0.8.2",
     "webpack": "^5.20.1",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-encoding-plugin": "^0.3.1"
   }
 }
