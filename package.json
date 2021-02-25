@@ -33,6 +33,7 @@
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
+    "html-react-parser": "^1.2.4",
     "html-webpack-plugin": "^5.0.0",
     "query-string": "^6.14.0",
     "react-dom": "^17.0.1",
@@ -40,7 +41,6 @@
     "svg-inline-loader": "^0.8.2",
     "webpack": "^5.20.1",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-encoding-plugin": "^0.3.1"
+    "webpack-dev-server": "^3.11.2"
   }
 }

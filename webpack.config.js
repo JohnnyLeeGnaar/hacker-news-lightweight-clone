@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const EncodingPlugin = require('webpack-encoding-plugin');
 const path = require('path');
 
 module.exports = {
@@ -19,9 +18,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'app/index.html'
-        }),
-        new EncodingPlugin({
-            encoding: 'iso-8859-1'
         })
     ],
     mode: process.env.NODE_ENV === 'development' ? 'production' : 'development',

@@ -3,11 +3,22 @@ import React from 'react'
 import queryString from 'query-string'
 import { getComments } from '../utils/api'
 import Loading from './Loading'
+import parse from 'html-react-parser';
 
 
 function Comments(props) {
     const { comments } = props;
     console.table(comments)
+
+    function test(text) {
+        if (text !== undefined && text.length) {
+            return parse(text)
+        }
+        else {
+            return <p></p>
+        }
+
+    }
 
     return (
         <ul>
@@ -25,7 +36,7 @@ function Comments(props) {
                             <div className='meta-info-light'>
                                 <span> by <a href='#'>{by}</a></span>
                                 <span> on  {date}, {hours} </span>
-                                <p>{text}</p>
+                                <div>{test(text)}</div>
                             </div>
                         </li>
 
@@ -78,7 +89,7 @@ export default class Post extends React.Component {
 
         return (
             <React.Fragment>
-                { this.isLoading() && <Loading text='Fetching comments'/>}
+                { this.isLoading() && <Loading text='Fetching comments' />}
                 { error && <p className='center-text error'>{error}</p>}
                 <div>
                     <h1>Comments:</h1>
