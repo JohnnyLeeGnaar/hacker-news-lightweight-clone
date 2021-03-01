@@ -1,47 +1,8 @@
 import React from "react";
-import { getComments } from "../utils/api";
-import parse from "html-react-parser";
+import { getItems } from "../utils/api";
+
 import Loading from "./Loading";
-
-function parseComment(text) {
-  if (text !== undefined && text.length) {
-    return parse(text);
-  } else {
-    return <p></p>;
-  }
-}
-
-function CommentsList({ comments }) {
-  return (
-    <ul>
-      {comments.map((comment, index) => {
-        if (comment !== null) {
-          const { by, id, parent, text, time, type, kids } = comment;
-          let date = new Date(time * 1000).toLocaleDateString();
-          let hours = new Date(time * 1000).toLocaleTimeString();
-
-          return (
-            <li className="comment" key={index}>
-              <div className="meta-info-light">
-                <span>
-                  {" "}
-                  by <a href="#">{by}</a>
-                </span>
-                <span>
-                  {" "}
-                  on {date}, {hours}{" "}
-                </span>
-                <div>{parseComment(text)}</div>
-              </div>
-            </li>
-          );
-        } else {
-          return console.log(`a value was null on index ${index}`);
-        }
-      })}
-    </ul>
-  );
-}
+import CommentsList from "./CommentsList";
 
 export default class Comments extends React.Component {
   state = {
@@ -50,15 +11,18 @@ export default class Comments extends React.Component {
   };
 
   componentDidMount() {
-    const { postId } = this.props;
-    this.fetchComments(postId);
+    const { commentsIds } = this.props;
+
+    if (commentsIds?.length > 0) {
+      this.fetchComments(commentsIds);
+    }
   }
 
-  fetchComments = (postId) => {
-    getComments(postId)
+  fetchComments = (commentsIds) => {
+    getItems(commentsIds)
       .then((comments) =>
         this.setState({
-          comments
+          comments,
         })
       )
       .catch(() => {
@@ -71,6 +35,11 @@ export default class Comments extends React.Component {
 
   render() {
     const { comments, error } = this.state;
+    const { commentsIds } = this.props;
+
+    if (!commentsIds || commentsIds?.length === 0) {
+      return null;
+    }
 
     if (!comments.length) {
       return <Loading text="Fetching comments" />;
@@ -79,8 +48,6 @@ export default class Comments extends React.Component {
       return <p className="center-text error">{error}</p>;
     }
 
-    return (
-        <CommentsList comments={comments} />
-    );
+    return <CommentsList comments={comments} />;
   }
 }

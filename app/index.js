@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Posts from "./components/Posts";
-import Post from "./components/Post";
+import Posts from "./screens/Posts";
+import Post from "./screens/Post";
 import Nav from "./components/Nav";
 
 import "./index.css";

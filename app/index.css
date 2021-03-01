@@ -1,0 +1,9 @@
+.comments-list {
+    border-left: solid 1.5px black;
+    background-color: burlywood;
+}
+
+.comment {
+    padding: 5px;
+    margin: 5px;
+}

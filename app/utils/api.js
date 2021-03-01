@@ -6,7 +6,7 @@ export function getPosts(type) {
     `${API_URL}/${type}.json?print=pretty&limitToFirst=10&orderBy="$key"`
   )
     .then((response) => response.json())
-    .then(fetchItems);
+    .then(getItems);
 }
 
 export function getPost(id) {
@@ -16,13 +16,9 @@ export function getPost(id) {
 }
 //after getting the id of the story as an argument, fetch returns an json object that has a property of 'kids' in an array which you can pass to fetchItems
 
-export function getComments(postId) {
-  return fetch(`${API_URL}/item/${postId}.json?print=pretty`)
-    .then((response) => response.json())
-    .then(({ kids }) => fetchItems(kids));
-}
+
 //general use purpose function to fetch a larger amount of data. You have to pass an array as an argument
-function fetchItems(items) {
+export function getItems(items = []) {
   let promises = items.map((item) => {
     return fetch(`${API_URL}/item/${item}.json`).then((result) =>
       result.json()
