@@ -2,7 +2,7 @@ import React from "react";
 import CommentsListItem from "./CommentsListItem";
 
 export default ({ comments }) => (
-  <ul className='comments-list'>
+  <ul className="comments-list">
     {comments.map((comment, index) => {
       if (comment !== null) {
         const { by, text, time, kids, id, deleted } = comment;

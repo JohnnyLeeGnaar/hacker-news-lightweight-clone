@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Posts from "./screens/Posts";
 import Post from "./screens/Post";
+import User from "./components/User";
 import Nav from "./components/Nav";
 
 import "./index.css";
@@ -18,9 +19,11 @@ class App extends Component {
         <div className="container">
           <Nav />
           <Switch>
-            <Route exact path="/" component={TopStories}></Route>
-            <Route path="/new" component={NewStories}></Route>
-            <Route path="/:id" component={Post} />
+            <Route exact path="/" component={TopStories} />
+            <Route path="/new" component={NewStories} />
+            <Route path="/user" component={User} />
+            <Route path="/post" component={Post} />
+            
           </Switch>
         </div>
       </Router>

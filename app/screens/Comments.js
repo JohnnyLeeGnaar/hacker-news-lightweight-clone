@@ -1,8 +1,8 @@
 import React from "react";
 import { getItems } from "../utils/api";
 
-import Loading from "./Loading";
-import CommentsList from "./CommentsList";
+import Loading from "../components/Loading";
+import CommentsList from "../components/CommentsList";
 
 export default class Comments extends React.Component {
   state = {

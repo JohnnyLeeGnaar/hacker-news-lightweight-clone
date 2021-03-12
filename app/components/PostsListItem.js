@@ -7,9 +7,16 @@ export default ({ url, title, by, date, hours, id, descendants }) => (
       {title}
     </a>
     <div className="meta-info-light">
+      <span> by</span>
       <span>
-        {" "}
-        by <a href="#">{by}</a>
+        <Link
+          to={{
+            pathname: "user",
+            search: `id=${by}`,
+          }}
+        >
+          {by}
+        </Link>{" "}
       </span>
       <span>
         {" "}
@@ -19,7 +26,7 @@ export default ({ url, title, by, date, hours, id, descendants }) => (
       <span>
         <Link
           to={{
-            pathname: "post",
+            pathname: "/post",
             search: `id=${id}`,
           }}
         >

@@ -5,7 +5,7 @@ import queryString from "query-string";
 import { getPost } from "../utils/api";
 
 import Loading from "../components/Loading";
-import Comments from "../components/Comments";
+import Comments from "./Comments";
 
 export default class Post extends React.Component {
   state = {
@@ -59,8 +59,16 @@ export default class Post extends React.Component {
         <div className="meta-info-light">
           <h1>{title}</h1>
           <span>
-            {" "}
-            by <a href="#">{by}</a>
+             by 
+            <Link
+              to={{
+                pathname: "user",
+                search: `id=${by}`,
+              }}
+            >
+              {by}
+            </Link>{" "}
+            comments
           </span>
           <span>
             {" "}

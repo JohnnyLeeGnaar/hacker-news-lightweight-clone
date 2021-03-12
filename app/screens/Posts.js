@@ -1,12 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import { getPosts } from "../utils/api";
 
 import Loading from "../components/Loading";
-import PostsList from "../components/PostsList"
-
-  
+import PostsList from "../components/PostsList";
 
 export default class Posts extends React.Component {
   state = {
@@ -37,6 +34,7 @@ export default class Posts extends React.Component {
 
   render() {
     const { posts, error } = this.state;
+    console.log(posts);
 
     if (error) {
       return error && <p className="center-text error">{error}</p>;
