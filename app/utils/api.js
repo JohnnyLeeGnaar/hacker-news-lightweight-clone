@@ -15,22 +15,31 @@ export function getPost(id) {
   );
 }
 
-export function getUser(id) {
-  return fetch(`${API_URL}/user/${id}.json?print=pretty`).then((response) =>
-    response.json()
-  );
+function getErrorMsg(user) {
+  return `Username ${user} doesn't exist`;
 }
 
+export function getUser(id) {
+  return fetch(`${API_URL}/user/${id}.json?print=pretty`)
+    .then((response) => response.json())
+    .then((user) => {
+      if (!user) {
+        throw new Error(getErrorMsg(id));
+      }
+      return user;
+    });
+}
+
+function filterPost(post, typeOfPost = "story") {
+  return post.filter(({ type, deleted }) => type === typeOfPost && deleted !== true);
+}
 
 //general use purpose function to fetch a larger amount of data. You have to pass an array as an argument
-export function getItems(items = []) {
+export function getItems(items = [], typeOfPost) {
   let promises = items.map((item) => {
     return fetch(`${API_URL}/item/${item}.json`).then((result) =>
       result.json()
     );
   });
-  return Promise.all(promises);
+  return Promise.all(promises).then((posts) => filterPost(posts, typeOfPost));
 }
-
-
-//https://hacker-news.firebaseio.com/v0/user/jl.json?print=pretty

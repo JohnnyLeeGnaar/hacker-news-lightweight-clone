@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default ({ url, title, by, date, hours, id, descendants }) => (
-  <li className="post" key={id}>
-    <a className="link" href={url}>
+  <li className="post">
+    <a className="link-info" href={url}>
       {title}
     </a>
-    <div className="meta-info-light">
-      <span> by</span>
+    <div>
+      <span> by </span>
       <span>
-        <Link
+        <Link className='link-info-minor'
           to={{
             pathname: "user",
             search: `id=${by}`,
@@ -24,7 +24,7 @@ export default ({ url, title, by, date, hours, id, descendants }) => (
       </span>
 
       <span>
-        <Link
+        <Link className='link-info-minor'
           to={{
             pathname: "/post",
             search: `id=${id}`,

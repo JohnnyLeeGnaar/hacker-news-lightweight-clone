@@ -23,12 +23,14 @@ export default class Post extends React.Component {
       .then((result) =>
         this.setState({
           post: result,
+          error: null,
         })
       )
-      .catch(() => {
-        console.warn("Error fetching post");
+      .catch((error) => {
+        console.warn("Error fetching repos: ", error);
+
         this.setState({
-          error: "A NetworkError occured while attempting to fetch resource.",
+          error: `There was an error fetching the user.`,
         });
       });
   };
@@ -41,7 +43,7 @@ export default class Post extends React.Component {
 
   render() {
     const { post, error } = this.state;
-    const { title, by, id, descendants, kids=[] } = post;
+    const { title, url, by, id, descendants, kids = [] } = post;
     const query = queryString.parse(this.props.location.search);
     const postId = query.id;
     let date = new Date(post.time * 1000).toLocaleDateString();
@@ -56,11 +58,11 @@ export default class Post extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="meta-info-light">
-          <h1>{title}</h1>
+        <div className="post-light">
+          <h1><a href={url}>{title}</a></h1>
+          <span>by </span>
           <span>
-             by 
-            <Link
+            <Link className="link-info-minor"
               to={{
                 pathname: "user",
                 search: `id=${by}`,
@@ -75,7 +77,7 @@ export default class Post extends React.Component {
             on {date}, {hours}{" "}
           </span>
           <span>
-            <Link
+            <Link className="link-info-minor"
               to={{
                 pathname: "post",
                 search: `id=${id}`,
@@ -86,7 +88,7 @@ export default class Post extends React.Component {
             comments
           </span>
         </div>
-        <div className="meta-info-light">
+        <div className="posts-light">
           {kids.length && <Comments commentsIds={kids} />}
         </div>
       </React.Fragment>

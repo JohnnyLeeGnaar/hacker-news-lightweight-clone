@@ -34,7 +34,6 @@ export default class Posts extends React.Component {
 
   render() {
     const { posts, error } = this.state;
-    console.log(posts);
 
     if (error) {
       return error && <p className="center-text error">{error}</p>;
@@ -44,8 +43,7 @@ export default class Posts extends React.Component {
     }
     return (
       <React.Fragment>
-        <div>
-          <h1>Posts:</h1>
+        <div className="posts-light">
           <PostsList posts={posts} />
         </div>
       </React.Fragment>

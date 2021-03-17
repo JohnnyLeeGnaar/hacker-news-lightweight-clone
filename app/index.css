@@ -1,9 +1,80 @@
+html,
+body,
+#app {
+  background-color: whitesmoke;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .comments-list {
   border-left: solid 1.5px black;
-  background-color: burlywood;
+  background-color: rgb(250, 212, 162);
 }
 
 .comment {
   padding: 5px;
   margin: 5px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+}
+
+.navbar {
+  display: flex;
+
+  flex-direction: row;
+  font-size: 1.2em;
+  font-family: "helvetica neue";
+  margin-top: 5%;
+}
+.navbar li {
+  padding-left: 10px;
+}
+.posts-light {
+  margin-left: 10px;
+}
+
+.post-light {
+  margin-left: 45px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  padding-bottom: 15px;
+  font-size: 1em;
+  font-family: "helvetica neue";
+}
+
+.link-info {
+  font-weight: bold;
+}
+
+.link-info-minor {
+  font-weight: 700;
+  color: black;
+  text-decoration: underline black;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: rgb(187, 46, 31);
+  text-decoration: none;
+}
+
+.link-info-minor,
+.link-info-minor:visited,
+.link-info-minor:hover,
+.link-info-minor:active {
+  color: inherit;
 }

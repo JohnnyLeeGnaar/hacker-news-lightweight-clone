@@ -2,14 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const activeStyle = {
-  color: "rgb(187, 46, 31)",
+  color: "black",
+  fontWeight: "900",
 };
 
 export default function Nav() {
-
   return (
-    <nav>
-      <ul>
+    <nav >
+      <ul className='navbar'>
         <li>
           <NavLink to="/" exact activeStyle={activeStyle} className="nav-link">
             Top

@@ -19,7 +19,7 @@ export default class Comments extends React.Component {
   }
 
   fetchComments = (commentsIds) => {
-    getItems(commentsIds)
+    getItems(commentsIds, 'comment')
       .then((comments) =>
         this.setState({
           comments,

@@ -1,14 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import PostsListItem from "./PostsListItem";
 
-export default ({ posts }) => (
-  <ul>
-    {console.log(posts)}
-    {posts.map((post, index) => {
-      if (post && post.type === "story") {
-        console.log(post);
+export default ({ posts }) => {
+
+  if(!posts.length){
+    return (<h3>This user hasn't posted anything yet</h3>)
+  }
+
+  return (
+
+    <ul>
+    {posts.map((post) => {
+      if (post) {
         const { by, descendants, id, time, title, url } = post;
         let date = new Date(time * 1000).toLocaleDateString();
         let hours = new Date(time * 1000).toLocaleTimeString();
@@ -21,12 +25,18 @@ export default ({ posts }) => (
             date={date}
             hours={hours}
             id={id}
+            key={id}
             descendants={descendants}
           />
         );
-      } else {
-        return console.log(`a value was null on index ${index}`);
       }
     })}
   </ul>
-);
+  )
+
+}
+
+
+
+  
+

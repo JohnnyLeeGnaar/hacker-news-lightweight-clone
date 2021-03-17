@@ -1,6 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import Comments from "../screens/Comments";
 
@@ -17,14 +17,14 @@ export default ({ by, text, date, hours, kids, deleted }) =>
     <li className="comment">
       <div className="meta-info-light">
         <span>
-        <Link
-              to={{
-                pathname: "user",
-                search: `id=${by}`,
-              }}
-            >
-              {by}
-            </Link>{" "}
+          <Link
+            to={{
+              pathname: "user",
+              search: `id=${by}`,
+            }}
+          >
+            {by}
+          </Link>{" "}
         </span>
         <span>
           {" "}
