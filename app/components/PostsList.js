@@ -10,7 +10,7 @@ export default ({ posts }) => {
 
   return (
 
-    <ul>
+    <div className='posts-info'>
     {posts.map((post) => {
       if (post) {
         const { by, descendants, id, time, title, url } = post;
@@ -31,7 +31,7 @@ export default ({ posts }) => {
         );
       }
     })}
-  </ul>
+  </div>
   )
 
 }

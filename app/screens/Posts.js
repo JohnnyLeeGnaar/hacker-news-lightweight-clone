@@ -42,11 +42,11 @@ export default class Posts extends React.Component {
       return <Loading />;
     }
     return (
-      <React.Fragment>
+      <>
         <div className="posts-light">
           <PostsList posts={posts} />
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

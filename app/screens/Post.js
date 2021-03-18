@@ -57,7 +57,7 @@ export default class Post extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         <div className="post-light">
           <h1><a href={url}>{title}</a></h1>
           <span>by </span>
@@ -91,7 +91,7 @@ export default class Post extends React.Component {
         <div className="posts-light">
           {kids.length && <Comments commentsIds={kids} />}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

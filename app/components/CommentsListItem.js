@@ -45,13 +45,12 @@ export default function CommentsListItem({
           </span>
           <div>{parseComment(text)}</div>
         </div>
-        <button onClick={toggleClass}>
+        <button onClick={toggleClass} className='btn-comments'>
           {kids ? "Show children comments" : ""}
         </button>
         <div className={isActive ? "test" : null}>
           <Comments commentsIds={kids} />
-        </div>
-        <hr />
+        </div>    
       </li>
     )
   );

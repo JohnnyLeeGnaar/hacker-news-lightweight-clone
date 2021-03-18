@@ -79,7 +79,7 @@ export default class User extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         {loadingUser === true ? (
           <Loading text="Fetching user" />
         ) : (
@@ -96,7 +96,6 @@ export default class User extends React.Component {
         )}
 
         <div className="post-light">
-
           <h2>Posts: </h2>
           {loadingPosts === true ? (
             <Loading text="Fetching posts" />
@@ -104,7 +103,7 @@ export default class User extends React.Component {
             <PostsList posts={posts} />
           )}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
