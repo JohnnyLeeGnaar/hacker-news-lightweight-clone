@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 
@@ -12,26 +12,47 @@ function parseComment(text) {
   }
 }
 
-export default ({ by, text, date, hours, kids, deleted }) =>
-  !deleted && (
-    <li className="comment">
-      <div className="meta-info-light">
-        <span>
-          <Link
-            to={{
-              pathname: "user",
-              search: `id=${by}`,
-            }}
-          >
-            {by}
-          </Link>{" "}
-        </span>
-        <span>
-          {" "}
-          on {date}, {hours}{" "}
-        </span>
-        <div>{parseComment(text)}</div>
-      </div>
-      <Comments commentsIds={kids} />
-    </li>
+export default function CommentsListItem({
+  by,
+  text,
+  date,
+  hours,
+  kids,
+  deleted,
+}) {
+  const [isActive, setActive] = useState(true);
+
+  const toggleClass = () => {
+    setActive(!isActive);
+  };
+  return (
+    !deleted && (
+      <li className="comment">
+        <div className="meta-info-light">
+          <span>
+            <Link
+              to={{
+                pathname: "user",
+                search: `id=${by}`,
+              }}
+            >
+              {by}
+            </Link>{" "}
+          </span>
+          <span>
+            {" "}
+            on {date}, {hours}{" "}
+          </span>
+          <div>{parseComment(text)}</div>
+        </div>
+        <button onClick={toggleClass}>
+          {kids ? "Show children comments" : ""}
+        </button>
+        <div className={isActive ? "test" : null}>
+          <Comments commentsIds={kids} />
+        </div>
+        <hr />
+      </li>
+    )
   );
+}
