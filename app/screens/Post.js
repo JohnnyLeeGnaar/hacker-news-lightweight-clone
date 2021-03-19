@@ -11,6 +11,7 @@ export default class Post extends React.Component {
   state = {
     post: {},
     error: null,
+    loading: true,
   };
 
   componentDidMount() {
@@ -24,6 +25,7 @@ export default class Post extends React.Component {
         this.setState({
           post: result,
           error: null,
+          loading: false,
         })
       )
       .catch((error) => {
@@ -35,24 +37,16 @@ export default class Post extends React.Component {
       });
   };
 
-  isLoading = () => {
-    const { post, error } = this.state;
-
-    return Object.keys(post).length === 0 && error === null;
-  };
-
   render() {
-    const { post, error } = this.state;
+    const { post, error, loading } = this.state;
     const { title, url, by, id, descendants, kids = [] } = post;
-    const query = queryString.parse(this.props.location.search);
-    const postId = query.id;
     let date = new Date(post.time * 1000).toLocaleDateString();
     let hours = new Date(post.time * 1000).toLocaleTimeString();
 
     if (error) {
       return error && <p className="center-text error">{error}</p>;
     }
-    if (!post) {
+    if (loading) {
       return <Loading />;
     }
 
