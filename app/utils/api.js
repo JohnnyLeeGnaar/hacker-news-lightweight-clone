@@ -31,7 +31,9 @@ export function getUser(id) {
 }
 
 function filterPost(post, typeOfPost = "story") {
-  return post.filter(({ type, deleted }) => type === typeOfPost && deleted !== true);
+  return post.filter(
+    ({ type, deleted }) => type === typeOfPost && deleted !== true
+  );
 }
 
 //general use purpose function to fetch a larger amount of data. You have to pass an array as an argument

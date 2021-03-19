@@ -59,10 +59,13 @@ export default class Post extends React.Component {
     return (
       <>
         <div className="post-light">
-          <h1><a href={url}>{title}</a></h1>
+          <h1>
+            <a href={url}>{title}</a>
+          </h1>
           <span>by </span>
           <span>
-            <Link className="link-info-minor"
+            <Link
+              className="link-info-minor"
               to={{
                 pathname: "user",
                 search: `id=${by}`,
@@ -77,7 +80,8 @@ export default class Post extends React.Component {
             on {date}, {hours}{" "}
           </span>
           <span>
-            <Link className="link-info-minor"
+            <Link
+              className="link-info-minor"
               to={{
                 pathname: "post",
                 search: `id=${id}`,

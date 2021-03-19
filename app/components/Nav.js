@@ -14,7 +14,7 @@ export default function Nav() {
       {({ theme, toggleTheme }) => (
         <nav>
           <div className="navbar">
-            <div className='navbar-item'>
+            <div className="navbar-item">
               <NavLink
                 to="/"
                 exact
@@ -24,18 +24,18 @@ export default function Nav() {
                 Top
               </NavLink>
             </div>
-            <div className='navbar-item'>
+            <div className="navbar-item">
               <NavLink to="/new" activeStyle={activeStyle} className="nav-link">
                 New
               </NavLink>
             </div>
           </div>
           <button
-            style={{ fontSize: 30}}
-            className='btn-theme'
+            style={{ fontSize: 30 }}
+            className="btn-theme"
             onClick={toggleTheme}
           >
-            {theme === 'light' ? '🔦' : '💡'}
+            {theme === "light" ? "🔦" : "💡"}
           </button>
         </nav>
       )}
